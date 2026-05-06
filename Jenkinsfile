@@ -51,24 +51,7 @@ pipeline {
         }
 
         // ТОЛЬКО ДЛЯ MAIN: загрузка в GitHub Releases
-        stage('GitHub Release') {
-            steps {
-                script {
-                    def jarFile = "target/JenkinsProjj-1.0-SNAPSHOT-jar-with-dependencies.jar"
-                    def tagName = "release-v${BUILD_NUMBER}"
 
-                    bat """
-                        gh release create ${tagName} \
-                            ${jarFile} \
-                            --repo ${REPO_NAME} \
-                            --title "Production Release ${BUILD_NUMBER}" \
-                            --notes "Jenkins main branch Release" \
-                            --latest=true
-                    """
-                    echo "✅ Создан релиз на GitHub"
-                }
-            }
-        }
     }
 
     post {
